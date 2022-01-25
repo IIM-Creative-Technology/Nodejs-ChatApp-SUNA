@@ -1,11 +1,21 @@
-# SUNA
+SUNA is a chat app written in node.js.
+It's from a team from [Pole Leonard Devinci](https://www.devinci.fr/).
 
-Suna is a Node Js chat app
+It has a node.js back-end API and front-end consumer.
 
-## Installation
+Needed : 
+- [node.js (version 16+)](https://nodejs.org/en/)
+- [npm](https://www.npmjs.com/)
 
-Clone the repository to install SUNA Chat App.
+The app use : 
+- node.js
+- [express](https://expressjs.com/)
+- [nodemon](https://www.npmjs.com/package/nodemon)
 
-```bash
-git clone https://github.com/IIM-Creative-Technology/Nodejs-ChatApp-SUNA.git
+To launch app : 
+```
+$ git clone https://github.com/IIM-Creative-Technology/Nodejs-ChatApp-SUNA.git
+$ cd Nodejs-ChatApp-SUNA
+$ npm install
+$ npm run start
 ```
