@@ -1,5 +1,5 @@
 SUNA is a chat app written in node.js.
-It's from a team from [Pole Leonard Devinci](https://www.devinci.fr/).
+It's build by a team from [Pole Leonard Devinci](https://www.devinci.fr/).
 
 It has a node.js back-end API and front-end consumer.
 
