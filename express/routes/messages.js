@@ -4,8 +4,8 @@ const messageServices = require('../services/message_services.js')
 
 router.post('/addMessage', (req, res, next) => {
     console.log(req.body);
-    messageServices.register(req.body).then(
-        () => res.send('success'),
+    messageServices.addMessage(req.body).then(
+    () => res.send('success'),
     ).catch(
         err => next(err)
     )

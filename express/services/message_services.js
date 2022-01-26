@@ -1,5 +1,4 @@
 const Message = require('../models/messages.js')
-const auth = require('../helpers/jwt.js')
 
 async function addMessage(params){
 
