@@ -18,7 +18,7 @@ mongoose.connect('mongodb+srv://Admin:Admin0000@cluster0.y1k51.mongodb.net/myFir
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var chatRouter = require('./routes/chat');
+// var chatRouter = require('./routes/chat');
 var messageRouter = require('./routes/messages');
 var convRouter = require('./routes/conv');
 
