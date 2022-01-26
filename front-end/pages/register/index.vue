@@ -24,7 +24,7 @@
         <!-- password -->
         <div class="mb-6 pt-3 rounded bg-gray-200">
             <label class="block text-gray-700 text-sm font-bold mb-2 ml-3" for="password">Password*</label>
-            <input type="password" id="password" v-model.trim="form.password"
+            <input autocomplete="on" type="password" id="password" v-model.trim="form.password"
             class="bg-gray-200 rounded w-full text-gray-700 focus:outline-none border-b-4 border-gray-300 focus:border-purple-600 transition duration-500 px-3 pb-3">
         </div><!-- password -->
 
@@ -38,7 +38,7 @@
     </section>
 
     <section v-if="success">
-    <p class="text-center"> Congratulations ! You can sign in <NuxtLink class="text-red-500 font-bold" to="/login">here</NuxtLink> now ! </p>
+      <p class="text-center"> Congratulations ! You can sign in <NuxtLink class="text-red-500 font-bold" to="/login">here</NuxtLink> now ! </p>
     </section>
 
   </div>
@@ -59,7 +59,7 @@ export default {
   },
 
   methods : {
-    // function to save a user who register
+    // method to save a user who register
     register() {
       this.error = null
 

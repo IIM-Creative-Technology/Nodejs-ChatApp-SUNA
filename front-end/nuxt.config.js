@@ -52,10 +52,39 @@ export default {
     proxyHeaders: true
   },
 
+  // authentication configuration
+  auth : {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url:`/api/users/login`,
+            method: 'post',
+            propertyName: 'token',
+          },
+          user: {
+            url: `/api/users/me`,
+            method: 'get',
+            propertyName: 'user',
+          },
+          logout: true,
+        },
+        tokenRequired: true,
+        tokenType: 'Bearer',
+      },
+    },
+    redirect: {
+      login: '/login?required', // User will be redirected to this path if login is required
+      logout: '/login', // User will be redirected to this path if after logout, current route is protected
+      home: '/user', // User will be redirect to this path after login if accessed login page directly
+    },
+    rewriteRedirects: true,
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   },
-  
+
   server: {
     port: 8000 // default: 3000
   }
