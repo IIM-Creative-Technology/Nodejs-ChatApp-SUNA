@@ -1,27 +1,21 @@
 var express = require('express');
 var router = express.Router();
 const Conv = require('../models/conv');
+const convServices = require('../services/conv_services.js')
 
-router.post('/', function(req, res, next) {
-    delete req.body._id;
-    const conv = new Conv({
-        ...req.body
-    });
-    conv.save()
-        .then(() => res.status(201).json({
-            message: 'Objet enregistré !'
-        }))
-        .catch(error => res.status(400).json({
-            error
-        }));
+
+router.post('/create', function(req, res, next) {
+    convServices.createConv(req.body).then(
+        () => res.send('success'),
+        ).catch(
+            err => next(err)
+        )
 });
 
-router.use('/', function(req, res, next) {
-    Conv.find()
-        .then(convs => res.status(200).json(convs))
-        .catch(error => res.status(400).json({
-            error
-        }));
+router.use('/all', function(req, res, next) {
+    convServices.getAll().then(
+        (user) => res.status(200).json(user)
+    ).catch(err => next(err))
 });
 
 router.get('/alone', function(req, res, next) {

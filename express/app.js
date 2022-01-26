@@ -31,6 +31,8 @@ app.use(auth.authenticateToken.unless({
         { url: '/users/register', methods: ['POST']},
         { url: '/users/all', methods: ['GET']},
         { url: '/messages/addMessage', methods: ['POST']},
+        { url: '/conv/create', methods: ['POST']},
+        { url: '/conv/all', methods: ['GET']},
         // { url: '/users/:id', methods: ['GET']},
     ]
 }))
@@ -45,7 +47,7 @@ app.use(errors.errorHandler); // catch and show Errors.
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/messages', messageRouter);
-app.use('/conversation', convRouter);
+app.use('/conv', convRouter);
 
 
 // catch 404 and forward to error handler

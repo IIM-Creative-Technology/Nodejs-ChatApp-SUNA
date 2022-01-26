@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const MessageSchema = new Schema({
-  idConv: { 
-    type: String, 
+  _idConv: { 
+    type: mongoose.Schema.Types.ObjectId, 
     required: true 
   },
-  idUser1: { 
-    type: String, 
+  _idUser1: { 
+    type: mongoose.Schema.Types.ObjectId, 
     required: true 
   },
   message: {
