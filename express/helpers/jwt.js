@@ -26,5 +26,6 @@ function generateAccessToken(username) {
 
 module.exports = {
     authenticateToken,
-    generateAccessToken
+    generateAccessToken,
+    SECRET
 }
