@@ -20,8 +20,8 @@ function authenticateToken(req, res, next) {
     })
 }
 
-function generateAccessToken(username) {
-    return jwt.sign({data: username}, SECRET, { expiresIn: '1h' });
+function generateAccessToken(id) {
+    return jwt.sign({ id }, SECRET, { expiresIn: '1h' });
 }
 
 module.exports = {

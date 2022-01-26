@@ -44,6 +44,7 @@ app.use(auth.authenticateToken.unless({
         { url: '/users/register', methods: ['POST']},
         { url: '/users/all', methods: ['GET']},
         { url: '/users/alone', methods: ['GET']},
+        { url: '/users/me', methods: ['GET']},
         { url: '/messages/addMessage', methods: ['POST']},
         // { url: '/users/:id', methods: ['GET']},
 

@@ -10,14 +10,14 @@ async function login({ username, password }, res) {
     .then((user) => {
       //* Check if the user exists
       if (!user) return res.status(401).json({ error: 'User not found' })
-      //* if the user exists check if the password is correct
+      console.log(user)
       bcrypt
         .compare(password, user.password)
         .then((valid) => {
           //* If the password is correct return the user with the token else return invalid password
           if (!valid) return res.status(401).json({ error: 'Invalid password' })
           res.status(200).json({
-            token: auth.generateAccessToken(username),
+            token: auth.generateAccessToken(user._id),
           })
         })
         .catch((error) => res.status(500).json({ error }))
