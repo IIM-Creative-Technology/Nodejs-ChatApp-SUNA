@@ -20,6 +20,8 @@ mongoose.connect('mongodb+srv://Admin:Admin0000@cluster0.y1k51.mongodb.net/myFir
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var messageRouter = require('./routes/messages');
+var convRouter = require('./routes/conv');
 
 var app = express();
 const httpServer = createServer(app);
@@ -42,6 +44,9 @@ app.use(auth.authenticateToken.unless({
         { url: '/users/register', methods: ['POST']},
         { url: '/users/all', methods: ['GET']},
         { url: '/users/alone', methods: ['GET']},
+        { url: '/messages/addMessage', methods: ['POST']},
+        // { url: '/users/:id', methods: ['GET']},
+
     ]
 }))
 
@@ -54,6 +59,8 @@ app.use(errors.errorHandler); // catch and show Errors.
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/messages', messageRouter);
+app.use('/conversation', convRouter);
 
 
 // catch 404 and forward to error handler
