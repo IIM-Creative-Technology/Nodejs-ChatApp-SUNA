@@ -3,6 +3,7 @@ var router = express.Router();
 const Thing = require('../models/thing');
 
 router.post('/', function(req, res, next) {
+    console.log(req.body)
     delete req.body._id;
     const thing = new Thing({
         ...req.body
@@ -16,7 +17,7 @@ router.post('/', function(req, res, next) {
         }));
 });
 
-router.use('/', function(req, res, next) {
+router.use('/all', function(req, res, next) {
     Thing.find()
         .then(things => res.status(200).json(things))
         .catch(error => res.status(400).json({
@@ -24,14 +25,26 @@ router.use('/', function(req, res, next) {
         }));
 });
 
-// router.get('/', function(req, res, next) {
-//     Thing.findOne({
-//             _id: req.params.id
-//         })
-//         .then(thing => res.status(200).json(thing))
-//         .catch(error => res.status(404).json({
-//             error
-//         }));
-// });
+router.get('/alone/:id', function(req, res, next) {
+    Thing.findOne({
+            _id: req.params.id
+        })
+        .then(thing => res.status(200).json(thing))
+        .catch(error => res.status(404).json({
+            error
+        }));
+});
+
+router.put('/modify/:id', (req, res, next) => {
+Thing.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
+    .then(() => res.status(200).json({ message: 'Objet modifié !'}))
+    .catch(error => res.status(400).json({ error }));
+});
+
+router.delete('/delete/:id', (req, res, next) => {
+Thing.deleteOne({ _id: req.params.id })
+    .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
+    .catch(error => res.status(400).json({ error }));
+});
 
 module.exports = router;
