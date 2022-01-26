@@ -38,7 +38,7 @@
     </section>
 
     <section v-if="success">
-      Congratulations ! You can sign in <NuxtLink to="/login">here</NuxtLink> now !
+    <p class="text-center"> Congratulations ! You can sign in <NuxtLink class="text-red-500 font-bold" to="/login">here</NuxtLink> now ! </p>
     </section>
 
   </div>
@@ -67,7 +67,7 @@ export default {
       if (!this.form.username || !this.form.email || !this.form.password) return (this.error = 'All fields are necessary')
 
       this.$axios
-        .post('ROUTE.URL', {
+        .post(`/api/users/register`, {
           username: this.form.username,
           email: this.form.email,
           password: this.form.password,

@@ -1,4 +1,7 @@
+const API_URL = 'http://localhost:4242'
+
 export default {
+  target: 'static',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'suna-chatapp',
@@ -14,10 +17,6 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
-  },
-
-  publicRuntimeConfig: {
-    NODE_ENV: process.env.NODE_ENV || 'developpement',
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -37,13 +36,20 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    '@nuxtjs/proxy'
   ],
+
+  // Proxy to avoid CORS
+  proxy: {
+    '/api/': { target: API_URL, pathRewrite: {'^/api/': ''}, changeOrigin: true }
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    proxy: true,
+    proxyHeaders: true
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
