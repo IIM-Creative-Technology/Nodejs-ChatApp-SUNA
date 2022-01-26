@@ -24,14 +24,14 @@ router.use('/', function(req, res, next) {
         }));
 });
 
-// router.get('/', function(req, res, next) {
-//     Thing.findOne({
-//             _id: req.params.id
-//         })
-//         .then(thing => res.status(200).json(thing))
-//         .catch(error => res.status(404).json({
-//             error
-//         }));
-// });
+router.get('/alone', function(req, res, next) {
+    Thing.findOne({
+            _id: req.params.id
+        })
+        .then(thing => res.status(200).json(thing))
+        .catch(error => res.status(404).json({
+            error
+        }));
+});
 
 module.exports = router;
