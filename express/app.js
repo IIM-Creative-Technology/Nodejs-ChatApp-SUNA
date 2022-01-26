@@ -19,6 +19,8 @@ mongoose.connect('mongodb+srv://Admin:Admin0000@cluster0.y1k51.mongodb.net/myFir
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var chatRouter = require('./routes/chat');
+var messageRouter = require('./routes/messages');
+var convRouter = require('./routes/conv');
 
 var app = express();
 
@@ -42,7 +44,6 @@ app.use(errors.errorHandler); // catch and show Errors.
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/chat', chatRouter);
 
 
 // catch 404 and forward to error handler
@@ -58,7 +59,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json({err});
 });
 
 module.exports = app;
