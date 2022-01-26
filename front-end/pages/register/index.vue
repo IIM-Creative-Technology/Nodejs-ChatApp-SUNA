@@ -38,7 +38,7 @@
     </section>
 
     <section v-if="success">
-    <p class="text-center"> Congratulations ! You can sign in <NuxtLink class="text-red-500 font-bold" to="/login">here</NuxtLink> now ! </p>
+      <p class="text-center"> Congratulations ! You can sign in <NuxtLink class="text-red-500 font-bold" to="/login">here</NuxtLink> now ! </p>
     </section>
 
   </div>
@@ -59,7 +59,7 @@ export default {
   },
 
   methods : {
-    // function to save a user who register
+    // method to save a user who register
     register() {
       this.error = null
 
