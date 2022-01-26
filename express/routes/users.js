@@ -1,7 +1,11 @@
 var express = require('express');
+const jwt = require('jsonwebtoken');
+const User = require('../models/user.js')
 var router = express.Router();
 const bcrypt = require('bcryptjs')
-const userServices = require('../services/user_services.js')
+const userServices = require('../services/user_services.js');
+const { response, json } = require('express');
+const SECRET = 'mykey'
 
 /* GET users listing. */
 router.get('/all', (req, res, next) => {
@@ -33,7 +37,6 @@ router.post('/login', (req, res, next) => {
 router.get('/alone', (req, res, next) => {
   userServices.getById(req.headers.authorization.split(' ')[1]).then(
     (user) => {
-      res.status(401).json({ error: 'User not found' })
       res.status(200).json({
         user: {
           _id: user._id,
@@ -44,4 +47,29 @@ router.get('/alone', (req, res, next) => {
     })
     .catch(err => next(err))
 });
+
+router.get('/me', (req, res, next) => {
+  try {
+    const token = req.headers.authorization.split(' ')[1]
+    const decodedToken = jwt.verify(token, SECRET)
+    const userId = decodedToken.id
+    User.findOne({ _id : userId })
+      .then((user) => {
+        if(!user) return res.status(401).json({ error : 'User not found' })
+          res.status(201).json({
+            user : {
+              _id: user._id,
+              email: user.email,
+              username: user.username
+            }
+          }); 
+      })
+
+  } catch (error) {
+    res.status(401).json({
+      error : "Invalid token"
+    })
+  }
+})
+
 module.exports = router;

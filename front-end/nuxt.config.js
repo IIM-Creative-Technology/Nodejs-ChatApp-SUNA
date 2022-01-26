@@ -58,12 +58,12 @@ export default {
       local: {
         endpoints: {
           login: {
-            url:`api/users/login`,
+            url:`/api/users/login`,
             method: 'post',
             propertyName: 'token',
           },
           user: {
-            url: 'http://localhost:4242/user/',
+            url: `/api/users/me`,
             method: 'get',
             propertyName: 'user',
           },
