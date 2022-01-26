@@ -36,7 +36,7 @@ router.post('/login', (req, res, next) => {
 /** Route to Get User by ID. */
 router.get('/:id', (req, res, next) => {
   userServices.getById(req.params.id).then(
-      (user) => res.json(user)
-  ).catch(err => next(err))
+    (user) => res.status(200).json(user))
+    .catch(err => next(err))
 });
 module.exports = router;

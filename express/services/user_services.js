@@ -34,7 +34,7 @@ async function getAll() {
 
     const user = await User.find();
     // call toJSON method applied during model instantiation
-    return user.toJSON()
+    return user;
 }
 
 module.exports = {
