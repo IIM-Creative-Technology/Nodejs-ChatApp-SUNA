@@ -1,9 +1,31 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-const messagesSchema = mongoose.Schema({
-  _idConv: { type: mongoose.Schema.Types.ObjectId, required: true },
-  _idUser1: { type: mongoose.Schema.Types.ObjectId, required: true },
-  message: {type: String, required: true}
+const MessageSchema = new Schema({
+  idConv: { 
+    type: String, 
+    required: true 
+  },
+  idUser1: { 
+    type: String, 
+    required: true 
+  },
+  message: {
+    type: String, 
+    required: true
+  }
 });
 
-module.exports = mongoose.model('messages', messagesSchema);
+MessageSchema.set('toJSON', {
+  transform: (_document, returnedObject) => {
+      returnedObject.id = returnedObject._id.toString()
+      delete returnedObject.idConv
+      delete returnedObject.idUser1
+      delete returnedObject.message
+  }
+});
+
+const Message =  mongoose.model("Message", MessageSchema);
+
+
+module.exports = mongoose.model('Message', MessageSchema);
