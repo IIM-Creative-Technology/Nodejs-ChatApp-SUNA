@@ -26,17 +26,22 @@ router.post('/register', (req, res, next) => {
 /** Route to Login an User */
 router.post('/login', (req, res, next) => {
   const { username, password} = req.body;
-  userServices.login({ username, password})
-      .then(user => {
-          res.json(user)
-      }
-  ).catch(err => next(err))
+  userServices.login({ username, password}, res);
 });
 
 /** Route to Get User by ID. */
-router.get('/:id', (req, res, next) => {
-  userServices.getById(req.params.id).then(
-    (user) => res.status(200).json(user))
+router.get('/alone', (req, res, next) => {
+  userServices.getById(req.headers.authorization.split(' ')[1]).then(
+    (user) => {
+      res.status(401).json({ error: 'User not found' })
+      res.status(200).json({
+        user: {
+          _id: user._id,
+          email: user.email,
+          username: user.username
+        },
+      })
+    })
     .catch(err => next(err))
 });
 module.exports = router;

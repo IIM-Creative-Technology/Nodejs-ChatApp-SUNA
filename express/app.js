@@ -2,6 +2,8 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+const { createServer } = require("http");
+const { Server } = require("socket.io");
 var logger = require('morgan');
 const mongoose = require('mongoose');
 const unless = require('express-unless')
@@ -20,6 +22,17 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+const httpServer = createServer(app);
+const io = new Server(httpServer);
+
+io.on("connection", (socket) => {
+  socket.on('chat message', (msg) => {    
+    io.emit('chat message', msg);  
+    });
+  console.log('someone use a socket');
+});
+
+httpServer.listen(3000);
 
 // middleware for authenticating token submitted with requests
 auth.authenticateToken.unless = unless
@@ -28,7 +41,7 @@ app.use(auth.authenticateToken.unless({
         { url: '/users/login', methods: ['POST']},
         { url: '/users/register', methods: ['POST']},
         { url: '/users/all', methods: ['GET']},
-        // { url: '/users/:id', methods: ['GET']},
+        { url: '/users/alone', methods: ['GET']},
     ]
 }))
 
