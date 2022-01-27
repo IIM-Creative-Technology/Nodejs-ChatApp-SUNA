@@ -1,7 +1,10 @@
 <template>
   <nav class="flex items-center justify-between flex-wrap bg-gray-800 p-6 w-full z-10 top-0">
 		<div class="flex items-center flex-shrink-0 text-white mr-6">
-			<NuxtLink class="text-white no-underline hover:text-white hover:no-underline" to="/">
+			<NuxtLink v-if="!this.$auth.loggedIn" class="text-white no-underline hover:text-white hover:no-underline" to="/">
+				<span class="text-2xl pl-2"><i class="em em-grinning"></i>SUNA ChatApp</span>
+			</NuxtLink>
+			<NuxtLink v-if="this.$auth.loggedIn" class="text-white no-underline hover:text-white hover:no-underline" to="/user">
 				<span class="text-2xl pl-2"><i class="em em-grinning"></i>SUNA ChatApp</span>
 			</NuxtLink>
 		</div>
@@ -14,11 +17,16 @@
 
 		<div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block pt-6 lg:pt-0" id="nav-content">
 			<ul class="list-reset lg:flex justify-end flex-1 items-center">
+        <li v-if="this.$auth.loggedIn" class="mr-3">
+          <NuxtLink class="inline-block font-bold uppercase text-white py-2 px-4" to="/user">Messages</NuxtLink>
+        </li>
 				<li class="mr-3">
-					<NuxtLink class="inline-block font-bold uppercase text-white py-2 px-4" to="/login">Login</NuxtLink>
+					<NuxtLink v-if="!this.$auth.loggedIn" class="inline-block font-bold uppercase text-white py-2 px-4" to="/login">Login</NuxtLink>
+					<NuxtLink v-if="this.$auth.loggedIn" class="inline-block font-bold uppercase text-white py-2 px-4" to="/user/profile">Profile</NuxtLink>
 				</li>
 				<li class="mr-3">
-					<NuxtLink class="inline-block font-bold uppercase text-white py-2 px-4" to="/register">Register</NuxtLink>
+					<NuxtLink v-if="!this.$auth.loggedIn" class="inline-block font-bold uppercase text-white py-2 px-4" to="/register">Register</NuxtLink>
+          <p v-if="this.$auth.loggedIn" class="inline-block font-bold uppercase text-white py-2 px-4 cursor-pointer" @click="$auth.logout()">Logout</p>
 				</li>
 			</ul>
 		</div>

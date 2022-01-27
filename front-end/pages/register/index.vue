@@ -33,7 +33,7 @@
           {{ error }}
         </p><!-- error -->
 
-        <button @click="register()" class="bg-gray-800 uppercase hover:bg-gray-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200" type="submit">Sign Up</button>
+        <button class="bg-gray-800 uppercase hover:bg-gray-700 text-white font-bold py-2 rounded shadow-lg hover:shadow-xl transition duration-200" type="submit">Sign Up</button>
       </form>
     </section>
 
