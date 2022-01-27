@@ -10,5 +10,10 @@ router.post('/addMessage', (req, res, next) => {
         err => next(err)
     )
 });
+router.get('/get', (req, res, next) => {
+    messageServices.getMessage(req.query).then(
+        (message) => res.status(200).json(message)
+    ).catch(err => next(err))
+});
 
 module.exports = router;

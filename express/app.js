@@ -48,6 +48,8 @@ app.use(auth.authenticateToken.unless({
         { url: '/messages/addMessage', methods: ['POST']},
         { url: '/conv/create', methods: ['POST']},
         { url: '/conv/all', methods: ['GET']},
+        { url: '/conv/myConv', methods: ['GET']},
+        { url: '/messages/get', methods: ['GET']},
         // { url: '/users/:id', methods: ['GET']},
 
     ]

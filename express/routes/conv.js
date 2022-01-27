@@ -12,20 +12,16 @@ router.post('/create', function(req, res, next) {
         )
 });
 
-router.use('/all', function(req, res, next) {
-    convServices.getAll().then(
-        (user) => res.status(200).json(user)
+router.use('/myConv', function(req, res, next) {
+    convServices.getMyConv(req.query).then(
+        (conv) => res.status(200).json(conv)
     ).catch(err => next(err))
 });
 
-router.get('/alone', function(req, res, next) {
-    Conv.findOne({
-            _id: req.params.id
-        })
-        .then(conv => res.status(200).json(conv))
-        .catch(error => res.status(404).json({
-            error
-        }));
+router.get('/all', function(req, res, next) {
+    convServices.getAll().then(
+        (conv) => res.status(200).json(conv)
+    ).catch(err => next(err))
 });
 
 module.exports = router;
