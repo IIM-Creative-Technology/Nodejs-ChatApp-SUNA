@@ -18,7 +18,7 @@
 		<div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block pt-6 lg:pt-0" id="nav-content">
 			<ul class="list-reset lg:flex justify-end flex-1 items-center">
         <li v-if="this.$auth.loggedIn" class="mr-3">
-          <NuxtLink class="inline-block font-bold uppercase text-white py-2 px-4" to="/user">Messages</NuxtLink>
+          <NuxtLink class="inline-block font-bold uppercase text-white py-2 px-4" to="/conversation">Messages</NuxtLink>
         </li>
 				<li class="mr-3">
 					<NuxtLink v-if="!this.$auth.loggedIn" class="inline-block font-bold uppercase text-white py-2 px-4" to="/login">Login</NuxtLink>

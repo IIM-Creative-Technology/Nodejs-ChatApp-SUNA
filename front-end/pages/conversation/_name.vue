@@ -11,6 +11,30 @@
     </section>
   </div>
 </template>
+<script>
+
+export default {
+  data(){
+    return {
+      message: null
+    }
+  },
+  mounted(){
+    console.log(this.$auth.user._id);
+
+    const url = this.$route.path.split('/')[2]
+    this.$axios
+    .get('/api/messages/get', {
+      params : {
+        id: url
+      }
+    }).then((resp)=> {
+      console.log(resp.data[0]);
+    })
+  }
+}
+</script>
+
 <style scoped>
 .containerMessage {
   width: 90%;
