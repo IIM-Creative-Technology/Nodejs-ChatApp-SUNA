@@ -97,9 +97,10 @@ export default {
     UpdateProfile() {
       this.formProfile.error = null
       this.formProfile.success = null
+
+      // Reset password form update
       this.formPassword.error = null
       this.formPassword.success = null
-      this.formProfile.password = null
       this.formPassword.password = null
       this.formPassword.newPassword = null
       this.formPassword.confirmNewPassword = null
@@ -115,6 +116,7 @@ export default {
         })
         .then(() => {
           this.formProfile.success = "Update done"
+          this.formProfile.password = null
           this.$auth.refreshTokens()
         })
         .catch((error) => {
@@ -128,14 +130,15 @@ export default {
       this.formProfile.success = null
       this.formPassword.error = null
       this.formPassword.success = null
-      this.formPassword.password = null
-      this.formPassword.newPassword = null
-      this.formPassword.confirmNewPassword = null
+      this.formProfile.password = null
+
       // no fields empty
       if (!this.formPassword.password || !this.formPassword.newPassword || !this.formPassword.confirmNewPassword) return (this.formPassword.error = 'All fields are necessary')
 
       if(this.formPassword.newPassword != this.formPassword.confirmNewPassword) return (this.formPassword.error = 'The new password and its confirmation are different')
       const token = this.$auth.user._id
+      console.log(this.formPassword.password)
+      console.log(this.formPassword.newPassword)
       this.$axios
         .put(`/api/users/update-psswd`, {
           password: this.formPassword.password,
@@ -144,6 +147,9 @@ export default {
         })
         .then(() => {
           this.formPassword.success = "Update done"
+          this.formPassword.password = null
+          this.formPassword.newPassword = null
+          this.formPassword.confirmNewPassword = null
           this.$auth.refreshTokens()
         })
         .catch((error) => {
