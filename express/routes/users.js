@@ -48,6 +48,22 @@ router.get('/alone', (req, res, next) => {
     .catch(err => next(err))
 });
 
+/** Route to Update User by ID. */
+router.put('/user-update', (req, res, next) => {
+  const {username, email, password} = req.body;
+  userServices.updateByID({username, email, password},req.headers.authorization.split(' ')[1]).then(
+    (user) => {
+      res.status(200).json({
+        user: {
+          _id: user._id,
+          email: user.email,
+          username: user.username
+        },
+      })
+    })
+    .catch(err => next(err))
+});
+
 router.get('/me', (req, res, next) => {
   try {
     const token = req.headers.authorization.split(' ')[1]

@@ -58,6 +58,43 @@ async function getById(token) {
     // return user;
 }
 
+async function updateByID({username, email, password},token) {
+    try {
+        let userUpdate;
+        const decodedToken = jwt.verify(token, auth.SECRET);
+        const id = decodedToken.id;
+        const user = await User.findOne({ _id: id });
+        if (user) {
+            console.log('password: ', bcrypt.compareSync(password, user.password));
+            if(bcrypt.compareSync(password, user.password)){
+                console.log("Password is good");
+                userUpdate = User.findByIdAndUpdate(id,{'username': username, 'email': email}, {upsert: true});
+                return userUpdate;
+            } else return 'Not Same Password'
+        } else return 'User do not Exist'
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function updatePassword({password},token) {
+    try {
+        let userUpdate;
+        const decodedToken = jwt.verify(token, auth.SECRET);
+        const id = decodedToken.id;
+        const user = await User.findOne({ _id: id });
+        if (user) {
+            console.log('password: ', bcrypt.compareSync(password, user.password));
+            if(bcrypt.compareSync(password, user.password)){
+                console.log("Password is good");
+                return await  User.findByIdAndUpdate(id,{'username': username, 'email': email}, {upsert: true});
+            } else return 'Not Same Password'
+        } else return 'User do not Exist'
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 async function getAll() {
 
     const user = await User.find();
@@ -69,5 +106,6 @@ module.exports = {
     login,
     register,
     getById,
-    getAll
+    getAll,
+    updateByID
 };
