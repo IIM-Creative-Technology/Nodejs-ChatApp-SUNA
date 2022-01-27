@@ -23,7 +23,7 @@ router.post('/register', (req, res, next) => {
   userServices.register(req.body).then(
       () => res.send('success')
   ).catch(
-      err => next(err)
+    err => next(err)
   )
 });
 
@@ -60,7 +60,8 @@ router.get('/me', (req, res, next) => {
             user : {
               _id: user._id,
               email: user.email,
-              username: user.username
+              username: user.username,
+              password : user.password
             }
           }); 
       })
