@@ -64,6 +64,22 @@ router.put('/user-update', (req, res, next) => {
     .catch(err => next(err))
 });
 
+/** Route to Update User Password. */
+router.put('/update-psswd', (req, res, next) => {
+  const {password, new_password} = req.body;
+  userServices.updatePassword({password, new_password},req.headers.authorization.split(' ')[1]).then(
+    (user) => {
+      res.status(200).json({
+        user: {
+          _id: user._id,
+          email: user.email,
+          username: user.username
+        },
+      })
+    })
+    .catch(err => next(err))
+});
+
 router.get('/me', (req, res, next) => {
   try {
     const token = req.headers.authorization.split(' ')[1]
