@@ -13,7 +13,6 @@ router.post('/addMessage', (req, res, next) => {
 });
 
 router.get('/get', (req, res, next) => {
-    console.log(req.query);
     
     messageServices.getMessage(req.query).then(
         
@@ -22,7 +21,6 @@ router.get('/get', (req, res, next) => {
     ).catch(err => next(err))
 });
 router.get('/all', (req, res, next) => {
-    console.log(req.query);
     
     messageServices.getAll().then(
         
