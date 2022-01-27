@@ -96,6 +96,13 @@ export default {
     // update profile
     UpdateProfile() {
       this.formProfile.error = null
+      this.formProfile.success = null
+      this.formPassword.error = null
+      this.formPassword.success = null
+      this.formProfile.password = null
+      this.formPassword.password = null
+      this.formPassword.newPassword = null
+      this.formPassword.confirmNewPassword = null
       // no fields empty
       if (!this.formProfile.username || !this.formProfile.email || !this.formProfile.password) return (this.formProfile.error = 'All fields are necessary')
       const token = this.$auth.user._id
@@ -108,6 +115,7 @@ export default {
         })
         .then(() => {
           this.formProfile.success = "Update done"
+          this.$auth.refreshTokens()
         })
         .catch((error) => {
           this.formProfile.error = "An error occured"
@@ -116,22 +124,27 @@ export default {
 
     // update password
     UpdatePassword() {
-       this.formPassword.error = null
-
+      this.formProfile.error = null
+      this.formProfile.success = null
+      this.formPassword.error = null
+      this.formPassword.success = null
+      this.formPassword.password = null
+      this.formPassword.newPassword = null
+      this.formPassword.confirmNewPassword = null
       // no fields empty
       if (!this.formPassword.password || !this.formPassword.newPassword || !this.formPassword.confirmNewPassword) return (this.formPassword.error = 'All fields are necessary')
 
-      if(this.formPassword.newPassword != !this.formPassword.confirmNewPassword) return (this.formPassword.error = 'The new password and its confirmation are different')
-
+      if(this.formPassword.newPassword != this.formPassword.confirmNewPassword) return (this.formPassword.error = 'The new password and its confirmation are different')
+      const token = this.$auth.user._id
       this.$axios
-        .put(`/api/users/user-update`, {
+        .put(`/api/users/update-psswd`, {
           password: this.formPassword.password,
           newPassword: this.formPassword.newPassword,
-
           headers: { Authorization: `Bearer ${token}` }
         })
         .then(() => {
           this.formPassword.success = "Update done"
+          this.$auth.refreshTokens()
         })
         .catch((error) => {
           this.formPassword.error = "An error occured"

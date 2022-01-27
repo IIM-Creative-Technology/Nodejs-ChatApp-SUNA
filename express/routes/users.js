@@ -53,13 +53,17 @@ router.put('/user-update', (req, res, next) => {
   const {username, email, password} = req.body;
   userServices.updateByID({username, email, password},req.headers.authorization.split(' ')[1]).then(
     (user) => {
-      res.status(200).json({
-        user: {
-          _id: user._id,
-          email: user.email,
-          username: user.username
-        },
-      })
+      if(user === 'Not Same Password') {
+        return res.status(401).json({ error: 'Invalid password' })
+      } else {
+        res.status(200).json({
+            user: {
+              _id: user._id,
+              email: user.email,
+              username: user.username
+            },
+        })
+      }
     })
     .catch(err => next(err))
 });
@@ -69,13 +73,17 @@ router.put('/update-psswd', (req, res, next) => {
   const {password, new_password} = req.body;
   userServices.updatePassword({password, new_password},req.headers.authorization.split(' ')[1]).then(
     (user) => {
-      res.status(200).json({
-        user: {
-          _id: user._id,
-          email: user.email,
-          username: user.username
-        },
-      })
+      if(user === 'Not Same Password') {
+        return res.status(401).json({ error: 'Invalid password' })
+      } else {
+        res.status(200).json({
+          user: {
+            _id: user._id,
+            email: user.email,
+            username: user.username
+          },
+        })
+      }
     })
     .catch(err => next(err))
 });

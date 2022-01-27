@@ -23,18 +23,9 @@ async function login({ username, password }, res) {
         .catch((error) => res.status(500).json({ error }))
     })
     .catch((error) => res.status(500).json({ error }))
-
-    // synchronously compare user entered password with hashed password
-    // if(bcrypt.compareSync(password, user.password)){
-    //     const token = auth.generateAccessToken(username);
-
-        // call toJSON method applied during model instantiation
-    //     return {...user.toJSON(), token}
-    // }
 }
 
 async function register(params){
-
     // instantiate a user modal and save to mongoDB
     const user = new User(params)
     await user.save();
@@ -47,15 +38,9 @@ async function getById(token) {
         const id = decodedToken.id
         const user = await User.findOne({ _id: id });
         return user;
-      } catch (error) {
+    } catch (error) {
         res.status(401).json({ error: 'Invalid token' })
     }
-
-    // const user = await User.findOne({
-    //     _id: id
-    // });
-    // // call toJSON method applied during model instantiation
-    // return user;
 }
 
 async function updateByID({username, email, password},token) {
@@ -64,14 +49,15 @@ async function updateByID({username, email, password},token) {
         const decodedToken = jwt.verify(token, auth.SECRET);
         const id = decodedToken.id;
         const user = await User.findOne({ _id: id });
-        if (user) {
-            console.log('password: ', bcrypt.compareSync(password, user.password));
+        
+        if (user) {            
             if(bcrypt.compareSync(password, user.password)){
-                console.log("Password is good");
                 userUpdate = User.findByIdAndUpdate(id,{'username': username, 'email': email}, {upsert: true});
                 return userUpdate;
-            } else return 'Not Same Password'
+            } else  return 'Not Same Password'
+        
         } else return 'User do not Exist'
+    
     } catch (error) {
         console.log(error);
     }
@@ -84,10 +70,9 @@ async function updatePassword({password, new_password},token) {
         const id = decodedToken.id;
         const user = await User.findOne({ _id: id });
         if (user) {
-            console.log('password: ', bcrypt.compareSync(password, user.password));
             if(bcrypt.compareSync(password, user.password)){
-                console.log("Password is good");
-                return await  User.findByIdAndUpdate(id,{'password': new_password}, {upsert: true});
+                userUpdate = User.findByIdAndUpdate(id,{'password': new_password}, {upsert: true});
+                return userUpdate;
             } else return 'Not Same Password'
         } else return 'User do not Exist'
     } catch (error) {
