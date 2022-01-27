@@ -45,6 +45,7 @@ app.use(auth.authenticateToken.unless({
         { url: '/users/all', methods: ['GET']},
         { url: '/users/alone', methods: ['GET']},
         { url: '/users/user-update', methods: ['PUT']},
+        { url: '/users/update-psswd', methods: ['PUT']},
         { url: '/users/me', methods: ['GET']},
         { url: '/messages/addMessage', methods: ['POST']},
         { url: '/conv/create', methods: ['POST']},
