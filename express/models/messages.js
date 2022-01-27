@@ -4,11 +4,12 @@ const { Schema } = mongoose;
 const MessageSchema = new Schema({
   _idConv: { 
     type: mongoose.Schema.Types.ObjectId, 
-    required: true 
+    required: true,
   },
   _idUser1: { 
     type: mongoose.Schema.Types.ObjectId, 
-    required: true 
+    required: true,
+    ref:'User'
   },
   message: {
     type: String, 

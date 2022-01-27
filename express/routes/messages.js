@@ -11,6 +11,7 @@ router.post('/addMessage', (req, res, next) => {
     )
 });
 router.get('/get', (req, res, next) => {
+    console.log(req.query);
     messageServices.getMessage(req.query).then(
         (message) => res.status(200).json(message)
     ).catch(err => next(err))

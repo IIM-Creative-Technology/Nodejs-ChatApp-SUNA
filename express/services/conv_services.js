@@ -8,13 +8,13 @@ async function createConv(params){
 }
 
 async function getMyConv(params) {
-    console.log(params.id)
     allConv = []
-    const conv = await Conv.find({_idUser1: params.id});
+    console.log(params)
+    const conv = await Conv.find({_idUser1: params}).populate('_idUser2');
     if(conv[0]){
         allConv.push(conv)
     }
-    const conv2 = await Conv.find({_idUser2: params.id});
+    const conv2 = await Conv.find({_idUser2: params}).populate('_idUser1');
     if(conv2[0]){
         allConv.push(conv2)
     }
