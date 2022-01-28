@@ -25,10 +25,12 @@ export default {
       for(var i = 0; i < resp.data[0].length; i++){
         if(resp.data[0][i]._id == url){
           if(resp.data[0][i]._idUser1.length != 0){
-            this.friend = resp.data[0][i]._idUser1.username
+            console.log("dans le if");
+            this.friend = resp.data[0][i]._idUser2.username
           }
           else{
-            this.friend = resp.data[0][i]._idUser2.username
+            console.log("dans le if");
+            this.friend = resp.data[0][i]._idUser1.username
           }
 
 
@@ -42,7 +44,6 @@ export default {
       }
     }).then((resp)=> {
       this.messages = resp.data.message
-      this.friend = this.messages[0]._idConv._idUser2.username
     })
   }
 }
