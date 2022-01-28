@@ -52,6 +52,8 @@ app.use(auth.authenticateToken.unless({
         { url: '/conv/all', methods: ['GET']},
         { url: '/conv/myConv', methods: ['GET']},
         { url: '/messages/get', methods: ['GET']},
+        { url: '/messages/all', methods: ['GET']},
+        { url: '/messages/delete', methods: ['DELETE']},
         // { url: '/users/:id', methods: ['GET']},
 
     ]
