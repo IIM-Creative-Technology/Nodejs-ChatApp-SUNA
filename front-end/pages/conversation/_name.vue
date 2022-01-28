@@ -4,6 +4,8 @@
     <section class="containerMessage">
     <MessageContainer v-for="message in messages" :key="message.id" :message="message"/>
     </section>
+    <textarea name="" id="" cols="30" rows="10" class="textarea"></textarea>
+    <input type="input" value="envoyer" @click="sendMessage">
   </div>
 </template>
 <script>

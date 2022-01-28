@@ -26,8 +26,8 @@ async function getMessage(params){
 }
 
 async function deleteMessage(params){
-    const message = await Message.find({_id: params.id})
-    await message.delete()
+    const message = await Message.deleteOne({_id: params.id})
+    
 }
 
 async function getAll(){

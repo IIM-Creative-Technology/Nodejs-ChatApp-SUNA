@@ -1,9 +1,10 @@
 <template>
   <div>
+
     <p class="notFromMe" v-if="$auth.user._id != message._idUser1.id">
       {{message.message}}
     </p>
-    <p class="fromMe" v-else>{{message.message}}
+    <p class="fromMe" v-else>{{message.message}}<button @click="deleteMessage(message.id)">SUPPRIMER</button>
     </p>
   </div>
 </template>
@@ -20,6 +21,23 @@
       console.log(this.message);
       console.log(this.$auth.user._id);
 
+    },
+    methods : {
+      deleteMessage(idMsg){
+        console.log('delete function')
+        this.$axios.delete(`/api/messages/delete`, {
+          params : {
+            id: idMsg
+          }
+        })
+        .then(() => {
+          console.log('success')
+          location.reload()
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+      }
     }
   }
 
