@@ -22,7 +22,6 @@ MessageSchema.set('toJSON', {
       returnedObject.id = returnedObject._id.toString()
       delete returnedObject.idConv
       delete returnedObject.idUser1
-      delete returnedObject.message
   }
 });
 

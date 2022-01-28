@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 
 router.post('/create', function(req, res, next) {
     convServices.createConv(req.body).then(
-        () => res.send('success'),
+        (resp) => res.send(resp),
         ).catch(
             err => next(err)
         )
