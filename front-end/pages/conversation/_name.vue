@@ -24,7 +24,13 @@ export default {
     .then((resp)=>{
       for(var i = 0; i < resp.data[0].length; i++){
         if(resp.data[0][i]._id == url){
-          this.friend = resp.data[0][i]._idUser2.username
+          if(resp.data[0][i]._idUser1.length != 0){
+            this.friend = resp.data[0][i]._idUser1.username
+          }
+          else{
+            this.friend = resp.data[0][i]._idUser2.username
+          }
+
 
         }
       }
