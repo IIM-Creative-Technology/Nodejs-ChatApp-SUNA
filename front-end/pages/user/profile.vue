@@ -142,7 +142,7 @@ export default {
       this.$axios
         .put(`/api/users/update-psswd`, {
           password: this.formPassword.password,
-          newPassword: this.formPassword.newPassword,
+          new_password: this.formPassword.newPassword,
           headers: { Authorization: `Bearer ${token}` }
         })
         .then(() => {

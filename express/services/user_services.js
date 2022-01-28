@@ -71,6 +71,8 @@ async function updatePassword({password, new_password},token) {
         const user = await User.findOne({ _id: id });
         if (user) {
             if(bcrypt.compareSync(password, user.password)){
+                const salt = bcrypt.genSaltSync();
+                new_password = bcrypt.hashSync(new_password, salt);
                 userUpdate = User.findByIdAndUpdate(id,{'password': new_password}, {upsert: true});
                 return userUpdate;
             } else return 'Not Same Password'
