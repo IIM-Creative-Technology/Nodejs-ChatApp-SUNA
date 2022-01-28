@@ -4,7 +4,7 @@
     <p class="notFromMe" v-if="$auth.user._id != message._idUser1.id">
       {{message.message}}
     </p>
-    <p class="fromMe" v-else>{{message.message}}<button @click="deleteMessage(message.id)">SUPPRIMER</button>
+    <p class="fromMe" v-else>{{message.message}}<button @click="deleteMessage(message.id)">X</button>
     </p>
   </div>
 </template>
@@ -61,6 +61,10 @@
     background-color: rgb(47, 47, 247);
     color: white;
     margin-bottom: 10px;
+    margin-left: auto;
+  }
+
+  .fromMe button{
     margin-left: auto;
   }
 
