@@ -5,6 +5,7 @@ async function createConv(params){
     // instantiate a user modal and save to mongoDB
     const conv = new Conv(params)
     await conv.save();
+    return conv
 }
 
 async function getMyConv(params) {

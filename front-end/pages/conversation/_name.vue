@@ -12,11 +12,23 @@ export default {
   data(){
     return {
       messages: null,
-      friend: ''
+      friend: '',
     }
   },
   mounted(){
     const url = this.$route.path.split('/')[2]
+    this.$axios
+    .get('/api/conv/myConv', {
+      token : this.$auth.user._id
+    })
+    .then((resp)=>{
+      for(var i = 0; i < resp.data[0].length; i++){
+        if(resp.data[0][i]._id == url){
+          this.friend = resp.data[0][i]._idUser2.username
+
+        }
+      }
+    })
     this.$axios
     .get('/api/messages/get', {
       params : {
