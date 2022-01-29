@@ -42,17 +42,24 @@ export default {
       }
 
       this.ids = tableData
+      var userModified = this.users
 
-      for(var i = 0; i < this.users.length; i++){
+      for(var i = 0; i < this.users.length+1; i++){
+        console.log(this.$auth.user._id)
 
+        if(this.$auth.user._id == this.users[i].id){
+          console.log('premier if')
+          userModified.splice(i,1)
+        }
         for(var j = 0; j < this.ids.length; j++){
 
-          if((this.$auth.user._id == this.ids[j]._idUser1 && this.users[i].id == this.ids[j]._idUser2._id) || (this.users[i].id == this.ids[j]._idUser1 && this.$auth.user._id == this.ids[j]._idUser2._id) ){
-            
-            this.users.splice(i,1)
+          if((this.$auth.user._id == this.ids[j]._idUser1 && this.users[i].id == this.ids[j]._idUser2.id) || (this.users[i].id == this.ids[j]._idUser1.id && this.$auth.user._id == this.ids[j]._idUser2) ){
+            console.log('dans le if');
+            userModified.splice(i,1)
           }
         }
       }
+    this.users = userModified
     })
 
 
