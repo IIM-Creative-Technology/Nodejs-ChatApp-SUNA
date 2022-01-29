@@ -32,15 +32,23 @@ export default {
       token : this.$auth.user._id
     })
     .then((resp)=> {
-      this.ids = resp.data[0]
-      console.log(this.ids.length);
+      console.log(resp.data[0])
+     var tableData = []
+      for(var i=0; i<resp.data.length; i++){
+        console.log('for1')
+        for(var j =0; j<resp.data[i].length; j++){
+          tableData.push(resp.data[i][j])
+        }
+      }
+
+      this.ids = tableData
+
       for(var i = 0; i < this.users.length; i++){
-        console.log("dans le 1for");
+
         for(var j = 0; j < this.ids.length; j++){
-          console.log("dans le 2for");
-          if((this.$auth.user._id == this.ids[j]._idUser1 && this.users[i].id == this.ids[j]._idUser2.id) || (this.users[i].id == this.ids[j]._idUser1 && this.$auth.user._id == this.ids[j]._idUser2.id) ){
-            console.log("dans le if");
-            console.log(i);
+
+          if((this.$auth.user._id == this.ids[j]._idUser1 && this.users[i].id == this.ids[j]._idUser2._id) || (this.users[i].id == this.ids[j]._idUser1 && this.$auth.user._id == this.ids[j]._idUser2._id) ){
+            
             this.users.splice(i,1)
           }
         }

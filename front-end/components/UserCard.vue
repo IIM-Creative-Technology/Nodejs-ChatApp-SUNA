@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white userCard" @click="StartConv()">
-    <h2>Name</h2>
+    <h2>{{user.username}}</h2>
     <p>Start Conversation</p>
   </div>
 </template>

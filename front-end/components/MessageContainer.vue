@@ -62,10 +62,13 @@
     color: white;
     margin-bottom: 10px;
     margin-left: auto;
+    position: relative;
   }
 
   .fromMe button{
     margin-left: auto;
+    position: absolute;
+    right: 15px;
   }
 
 </style>
